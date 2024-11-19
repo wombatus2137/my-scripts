@@ -18,17 +18,29 @@ if ( !$FontTest )
     }
 }
 
-#Set Terminal font
-$SourceJSONTest = Test-Path -Path .\custom_prompt.json
-if ( $SourceJSONTest )
+#Create Windows Terminal JSON fragment to set font
+$fragmentJson=@'
 {
-    New-Item -Path $env:LOCALAPPDATA'\Microsoft\Windows Terminal\Fragments\custom_prompt' -Type Directory
-    Copy-Item -Path .\custom_prompt.json -Destination $env:LOCALAPPDATA'\Microsoft\Windows Terminal\Fragments\custom_prompt\custom_prompt.json'
+  "profiles": [
+    {
+      "updates": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+      "font": 
+      {
+        "face": "CaskaydiaCove Nerd Font"
+      }
+    },
+    {
+      "updates": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+      "font": 
+      {
+        "face": "CaskaydiaCove Nerd Font"
+      }
+    }
+  ]
 }
-else
-{
-    Write-Error -Message 'Cannot find custom_prompt.json' -Category ObjectNotFound -RecommendedAction 'Download custom_prompt.json from the script source to script''s directory, then rerun the script.'
-}
+'@
+New-Item -Path $env:LOCALAPPDATA'\Microsoft\Windows Terminal\Fragments\custom_prompt' -Type Directory
+Write-Output $fragmentJson | Out-File $env:LOCALAPPDATA'\Microsoft\Windows Terminal\Fragments\custom_prompt\custom_prompt.json' -Encoding Utf8
 
 #Setup Oh My Posh
 winget install JanDeDobbeleer.OhMyPosh -s winget
