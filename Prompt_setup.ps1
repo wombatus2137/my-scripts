@@ -15,6 +15,7 @@ if ( !$FontTest )
     Expand-Archive -Path .\CascadiaCode.zip
     Get-ChildItem *.ttf | ForEach-Object -Process {
         ( ( New-Object -ComObject Shell.Application ).Namespace( 0x14 ) ).CopyHere( $_.FullName )
+        Write-Warning -Message 'Reboot to complete font installation'
     }
 }
 
