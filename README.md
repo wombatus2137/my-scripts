@@ -10,7 +10,10 @@ Updates all programs and PowerShell modules installed on a sysytem.
 ## List programs
 Lists all programs installed on a sysytem.
 
-## Prompt setup & Reset prompt
+## Prompt setup
 Installs Oh My Posh with default configuration.
 
 Inspired by: [ChrisTitusTech / powershell-profile](https://github.com/ChrisTitusTech/powershell-profile)
+
+### Reset prompt
+Resets the PowerShell profile.
