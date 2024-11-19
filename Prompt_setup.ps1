@@ -60,4 +60,5 @@ if ( !$PROFILETest )
 {
     New-Item -Path $PROFILE -Type File -Force
 }
-Add-Content -Path $PROFILE -Value $RunTerminalIcons, $RunOhMyPosh
+$IPAAlias = 'function ipa {ipconfig /all}'
+Add-Content -Path $PROFILE -Value $RunTerminalIcons, $RunOhMyPosh, $IPAAlias
