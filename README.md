@@ -10,6 +10,9 @@ Updates all programs and PowerShell modules installed on a sysytem.
 ## List programs
 Lists all programs installed on a sysytem.
 
+## Request IP
+Releases current and request new IP from DHCP server.
+
 ## Prompt setup
 Installs Oh My Posh with default configuration.
 
