@@ -28,14 +28,18 @@ $fragmentJson=@'
       "font": 
       {
         "face": "CaskaydiaCove Nerd Font"
-      }
+      },
+      "opacity": 70,
+      "useAcrylic": true
     },
     {
       "updates": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
       "font": 
       {
         "face": "CaskaydiaCove Nerd Font"
-      }
+      },
+      "opacity": 70,
+      "useAcrylic": true
     }
   ]
 }
