@@ -20,7 +20,7 @@ if ( !$FontTest )
 }
 
 #Create Windows Terminal JSON fragment to set font
-$fragmentJson=@'
+$fragmentJson = @'
 {
   "profiles": [
     {
@@ -65,5 +65,18 @@ if ( !$PROFILETest )
 {
     New-Item -Path $PROFILE -Type File -Force
 }
-$IPAAlias = 'function ipa {ipconfig /all}'
-Add-Content -Path $PROFILE -Value $RunTerminalIcons, $RunOhMyPosh, $IPAAlias
+$Aliases = @'
+function ipa { ipconfig /all }
+function gs { git status }
+function gf { git fetch }
+function gp { 
+    git fetch
+    git pull 
+}
+function lazyg {
+    git add .
+    git commit -m "$args"
+    git push
+}
+'@
+Add-Content -Path $PROFILE -Value $RunTerminalIcons, $RunOhMyPosh, $Aliases
