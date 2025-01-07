@@ -20,7 +20,7 @@ if ( !$FontTest )
 }
 
 #Create Windows Terminal JSON fragment to set font
-$fragmentJson = @'
+$FragmentJson = @'
 {
   "profiles": [
     {
@@ -69,7 +69,7 @@ $Aliases = @'
 function ipa { ipconfig /all }
 function gs { git status }
 function gf { git fetch }
-function gp { 
+function gp {
     git fetch
     git pull 
 }
