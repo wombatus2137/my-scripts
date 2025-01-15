@@ -69,7 +69,7 @@ $Aliases = @'
 function ipa { ipconfig /all }
 function gs { git status }
 function gf { git fetch }
-function gp {
+function gpu {
     git fetch
     git pull 
 }
