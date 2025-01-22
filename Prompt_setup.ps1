@@ -78,5 +78,6 @@ function lazyg {
     git commit -m "$args"
     git push
 }
+function msc { docker exec -i $args rcon-cli }
 '@
 Add-Content -Path $PROFILE -Value $RunTerminalIcons, $RunOhMyPosh, $Aliases
