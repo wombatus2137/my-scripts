@@ -13,6 +13,9 @@ Lists all programs installed on a sysytem.
 ## Request IP
 Releases current and request new IP from DHCP server.
 
+## Config Git
+Configures Git with GPG signing
+
 ## SSH server & SSH client
 Configures SSH
 
