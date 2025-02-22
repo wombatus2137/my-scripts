@@ -13,6 +13,9 @@ Lists all programs installed on a sysytem.
 ## Request IP
 Releases current and request new IP from DHCP server.
 
+## SSH server & SSH client
+Configures SSH
+
 ## Prompt setup
 Installs Oh My Posh with default configuration.
 
