@@ -15,7 +15,7 @@ winget install --id Git.Git -e --source winget -i
 winget install --id GitHub.cli
 
 #Refresh the PATH environment variable
-$env:Path = [System.Environment]::GetEnvironmentVariable( 'Path', 'Machine' ) + ';' + [System.Environment]::GetEnvironmentVariable( 'Path', 'User' ) 
+$env:Path = [System.Environment]::GetEnvironmentVariable( 'Path', 'Machine' ) + ';' + [System.Environment]::GetEnvironmentVariable( 'Path', 'User' )
 
 #Make sure the gpg command can be run even if gpg is not in the PATH
 function gpg {
