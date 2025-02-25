@@ -3,7 +3,7 @@
 .SYNOPSIS
 Configures Git with GPG signing
 #>
-param ( $Email, $UserName = 'localhost' )
+param ( $Email, $UserName )
 $EmailTest = $null -eq $Email
 $UserNameTest = $null -eq $UserName
 if ( $EmailTest -or $UserNameTest ) {
@@ -38,5 +38,6 @@ git config --global user.signingkey $KeyID
 git config --global commit.gpgsign true
 git config --global tag.gpgSign true
 
-#Install Copilot extension
+#Prepare GH CLI
+gh auth login
 gh extension install github/gh-copilot
