@@ -6,8 +6,7 @@ Configures Git with GPG signing
 param ( $Email, $UserName = 'localhost' )
 $EmailTest = $null -eq $Email
 $UserNameTest = $null -eq $UserName
-if ( $EmailTest -or $UserNameTest )
-{
+if ( $EmailTest -or $UserNameTest ) {
     throw 'No email or username provided, input them as an argument'
 }
 
@@ -20,13 +19,13 @@ $env:Path = [System.Environment]::GetEnvironmentVariable( 'Path', 'Machine' ) + 
 
 #Make sure the gpg command can be run even if gpg is not in the PATH
 function gpg {
-    C:\Program Files\Git\usr\bin\gpg.exe $args
+    & 'C:\Program Files\Git\usr\bin\gpg.exe' $args
 }
 
 #Prepare GPG key
 gpg --full-generate-key
 gpg --list-secret-keys --keyid-format=long
-$KeyID= Read-Host 'Enter enter key ID you want to use: '
+$KeyID= Read-Host 'Enter enter key ID you want to use'
 
 #Prints the GPG key ID, in ASCII armor format
 gpg --armor --export $KeyID
