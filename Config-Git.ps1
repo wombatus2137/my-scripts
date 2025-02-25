@@ -25,7 +25,7 @@ function gpg {
 #Prepare GPG key
 gpg --full-generate-key
 gpg --list-secret-keys --keyid-format=long
-$KeyID= Read-Host 'Enter enter key ID you want to use'
+$KeyID = Read-Host 'Enter enter key ID you want to use'
 
 #Prints the GPG key ID, in ASCII armor format
 gpg --armor --export $KeyID
