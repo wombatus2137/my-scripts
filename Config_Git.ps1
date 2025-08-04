@@ -17,18 +17,17 @@ winget install --id GitHub.cli
 #Refresh the PATH environment variable
 $env:Path = [System.Environment]::GetEnvironmentVariable( 'Path', 'Machine' ) + ';' + [System.Environment]::GetEnvironmentVariable( 'Path', 'User' )
 
-#Make sure the gpg command can be run even if gpg is not in the PATH
-function gpg {
-    & 'C:\Program Files\Git\usr\bin\gpg.exe' $args
-}
-
-#Prepare GPG key
+#!GPG provided by Git is partially broken, so this is a workaround
+#Export script to bash to prepare GPG key
+$BashPart = @'
 gpg --full-generate-key
 gpg --list-secret-keys --keyid-format=long
-$KeyID = Read-Host 'Enter enter key ID you want to use'
-
-#Prints the GPG key ID, in ASCII armor format
+read -p 'Enter enter key ID you want to use: ' KeyID
 gpg --armor --export $KeyID
+'@
+Write-Output $BashPart | Out-File BashPart.sh
+& $env:ProgramFiles'\Git\usr\bin\bash.exe' BashPart.sh
+Remove-Item -Path BashPart.sh
 
 #Configure Git
 git config --global user.email "$Email"
