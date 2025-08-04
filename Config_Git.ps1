@@ -44,7 +44,8 @@ gh auth login
 gh extension install github/gh-copilot
 
 #Configure Commitizen
-choco install nodejs
+#? Is winget NodeJS packege officially supported?
+winget install -e OpenJS.NodeJS
 RefreshPath
 npm install -g @commitlint/prompt @commitlint/config-conventional commitizen
 Write-Output -InputObject '{ "path": "@commitlint/prompt" }' > ~/.czrc
