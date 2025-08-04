@@ -9,13 +9,13 @@ $UserNameTest = $null -eq $UserName
 if ( $EmailTest -or $UserNameTest ) {
     throw 'No email or username provided, input them as an argument'
 }
+function RefreshPath {
+    $env:Path = [System.Environment]::GetEnvironmentVariable( 'Path', 'Machine' ) + ';' + [System.Environment]::GetEnvironmentVariable( 'Path', 'User' )
+}
 
-#Install programs
+#Install Git
 winget install --id Git.Git -e --source winget -i
-winget install --id GitHub.cli
-
-#Refresh the PATH environment variable
-$env:Path = [System.Environment]::GetEnvironmentVariable( 'Path', 'Machine' ) + ';' + [System.Environment]::GetEnvironmentVariable( 'Path', 'User' )
+RefreshPath
 
 #!GPG provided by Git is partially broken, so this is a workaround
 #Export script to bash to prepare GPG key
@@ -37,6 +37,14 @@ git config --global user.signingkey $KeyID
 git config --global commit.gpgsign true
 git config --global tag.gpgSign true
 
-#Prepare GH CLI
+#Configure GH CLI
+winget install --id GitHub.cli
+RefreshPath
 gh auth login
 gh extension install github/gh-copilot
+
+#Configure Commitizen
+choco install nodejs
+RefreshPath
+npm install -g @commitlint/prompt @commitlint/config-conventional commitizen
+Write-Output -InputObject '{ "path": "@commitlint/prompt" }' > ~/.czrc
