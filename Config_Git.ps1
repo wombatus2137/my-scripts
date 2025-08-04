@@ -26,7 +26,7 @@ read -p 'Enter enter key ID you want to use: ' KeyID
 gpg --armor --export $KeyID
 '@
 Write-Output $BashPart | Out-File BashPart.sh
-& $env:ProgramFiles'\Git\usr\bin\bash.exe' BashPart.sh
+& $env:ProgramFiles'\Git\usr\bin\bash.exe' -l BashPart.sh
 Remove-Item -Path BashPart.sh
 
 #Configure Git
