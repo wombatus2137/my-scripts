@@ -10,6 +10,9 @@ Updates all programs and PowerShell modules installed on a sysytem.
 ## List programs
 Lists all programs installed on a sysytem.
 
+## Check system files
+Checks Windows system files for corruption.
+
 ## Request IP
 Releases current and request new IP from DHCP server.
 
