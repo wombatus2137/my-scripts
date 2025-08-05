@@ -17,10 +17,10 @@ Checks Windows system files for corruption.
 Releases current and request new IP from DHCP server.
 
 ## Config Git
-Configures Git with GPG signing
+Configures Git with GPG signing and Conventional Changelog
 
 ## SSH server & SSH client
-Configures SSH
+Configures SSH.
 
 ## Prompt setup
 Installs Oh My Posh with default configuration.
