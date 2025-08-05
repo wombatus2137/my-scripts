@@ -53,7 +53,8 @@ gh extension install github/gh-copilot
 
 #Configure Commitizen
 #? Is winget NodeJS packege officially supported?
-winget install -e OpenJS.NodeJS
+winget install -e OpenJS.NodeJS.LTS
 RefreshPath
-npm install -g @commitlint/prompt @commitlint/config-conventional commitizen
-Write-Output -InputObject '{ "path": "@commitlint/prompt" }' > ~/.czrc
+npm install -g commitizen
+npm install -g cz-conventional-changelog
+Write-Output -InputObject '{ "path": "cz-conventional-changelog" }' > ~/.czrc
