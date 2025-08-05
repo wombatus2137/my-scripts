@@ -1,4 +1,3 @@
-#Requires -RunAsAdministrator
 <#
 .SYNOPSIS
 Configures Git with GPG signing
@@ -11,6 +10,9 @@ if ( $EmailTest -or $UserNameTest ) {
 }
 if ( $null -eq $KeyID ) {
     $KeyID = '$KeyID'
+}
+if ( !( [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent() ).IsInRole( [Security.Principal.WindowsBuiltInRole] "Administrator" ) ) {
+    Write-Warning -Message "Administrator rights recommended"
 }
 function RefreshPath {
     $env:Path = [System.Environment]::GetEnvironmentVariable( 'Path', 'Machine' ) + ';' + [System.Environment]::GetEnvironmentVariable( 'Path', 'User' )
