@@ -9,3 +9,4 @@ winget upgrade -r --accept-package-agreements --accept-source-agreements
 Update-Module
 gh extension upgrade --all
 python.exe -m pip install --upgrade pip
+npm update -g
