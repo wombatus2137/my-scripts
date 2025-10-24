@@ -5,7 +5,7 @@ Installs Oh My Posh with default configuration
 #>
 param ( $Reset )
 if ( $Reset -eq $true ) {
-    & .\Reset_prompt.ps1
+    & $PSScriptRoot'\Reset_prompt.ps1'
 }
 
 #Install a Nerd Font
