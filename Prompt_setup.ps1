@@ -64,7 +64,7 @@ $RunTerminalIcons = 'Import-Module -Name Terminal-Icons'
 
 #Write PowerShell profile
 $PROFILETest = Test-Path -Path $PROFILE
-if ( !$PROFILETest ){
+if ( !$PROFILETest ) {
     New-Item -Path $PROFILE -Type File -Force
 }
 $Aliases = @'
