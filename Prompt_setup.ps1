@@ -72,9 +72,9 @@ function gpu {
 }
 function lazyg {
     git add .
-    git commit -m "$args"
+    cz
     git push
 }
-function msc { docker exec -i $args rcon-cli }
+function touch { New-Item -Path $args }
 '@
 Add-Content -Path $PROFILE -Value $RunTerminalIcons, $RunOhMyPosh, $Aliases
