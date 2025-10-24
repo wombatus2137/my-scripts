@@ -4,13 +4,10 @@
 Configures SSH client
 #>
 param ( $RemoteUser, $Server = 'localhost' )
-$RemoteUserTest = $null -eq $RemoteUser
-if ( $RemoteUserTest )
-{
+if ( $null -eq $RemoteUser ) {
     throw 'No remote user provided, input remote username as an argument'
 }
-if ( $Server -eq $null )
-{
+if ( $null -eq $Server ) {
     Write-Warning -Message 'No server provided - using localhost'
 }
 Write-Warning -Message 'Configure server first'

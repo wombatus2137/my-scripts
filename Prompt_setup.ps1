@@ -6,14 +6,12 @@ Installs Oh My Posh with default configuration
 #Install a Nerd Font
 $FontTest = Test-Path -Path $env:LOCALAPPDATA'\Microsoft\Windows\Fonts\CaskaydiaCoveNerdFont-Regular.ttf'
 $ArchiveTest = Test-Path -Path .\CascadiaCode.zip
-if ( !$FontTest )
-{
-    if ( !$ArchiveTest )
-    {
+if ( !$FontTest ) {
+    if ( !$ArchiveTest ) {
         Invoke-WebRequest -Uri https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.zip -OutFile .\CascadiaCode.zip
     }
     Expand-Archive -Path .\CascadiaCode.zip
-    Get-ChildItem *.ttf | ForEach-Object -Process {
+    Get-ChildItem -Path .\CascadiaCode\*.ttf | ForEach-Object -Process {
         ( ( New-Object -ComObject Shell.Application ).Namespace( 0x14 ) ).CopyHere( $_.FullName )
         Write-Warning -Message 'Reboot to complete font installation'
     }
@@ -61,8 +59,7 @@ $RunTerminalIcons = 'Import-Module -Name Terminal-Icons'
 
 #Write PowerShell profile
 $PROFILETest = Test-Path -Path $PROFILE
-if ( !$PROFILETest )
-{
+if ( !$PROFILETest ){
     New-Item -Path $PROFILE -Type File -Force
 }
 $Aliases = @'
