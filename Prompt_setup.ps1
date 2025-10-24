@@ -3,6 +3,11 @@
 .SYNOPSIS
 Installs Oh My Posh with default configuration
 #>
+param ( $Reset )
+if ( $Reset -eq $true ) {
+    & .\Reset_prompt.ps1
+}
+
 #Install a Nerd Font
 $FontTest = Test-Path -Path $env:LOCALAPPDATA'\Microsoft\Windows\Fonts\CaskaydiaCoveNerdFont-Regular.ttf'
 $ArchiveTest = Test-Path -Path .\CascadiaCode.zip
