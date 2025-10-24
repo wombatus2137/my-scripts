@@ -7,6 +7,9 @@ Quickly changes what happens when you close your laptop's lid.
 ## Update everything
 Updates all programs and PowerShell modules installed on a sysytem.
 
+## Bulk rename
+Renames all files in current directory to their creation dates.
+
 ## List programs
 Lists all programs installed on a sysytem.
 
