@@ -9,7 +9,7 @@ function CheckName {
     $OriginalProposedName = $ProposedName
     while ( $UsedDates -contains $ProposedName) {
         $i++
-        $ProposedName = $OriginalProposedName + ' (' + $i + ")"
+        $ProposedName = $OriginalProposedName + ' (' + $i + ')'
     }
     $script:UsedDates += "$ProposedName"
     return $ProposedName
@@ -18,10 +18,11 @@ function CheckName {
 Get-ChildItem -File | Sort-Object -Property CreationTime | ForEach-Object -Process {
     if ( $_.LastWriteTime -le $_.CreationTime ) {
         $CreationDate = $_.LastWriteTime.ToString( 'dd-MM-yyyy' )
-    } else {
+    }
+    else {
         $CreationDate = $_.CreationTime.ToString( 'dd-MM-yyyy' )
     }
     $Extension = $_.Extension
     $FinalName = CheckName -ProposedName $CreationDate
-    Rename-Item -Path $_.Name -NewName "$FinalName$Extension"
+    Rename-Item -Path $_.Name -NewName $FinalName$Extension
 }
