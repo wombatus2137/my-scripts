@@ -25,6 +25,7 @@ RefreshPath
 #!GPG provided by Git is partially broken, so this is a workaround
 #Export script to bash
 $BashPart = @"
+#!/bin/bash
 #Prepare GPG key
 if [ -z "$KeyID" ]; then
     gpg --full-generate-key
