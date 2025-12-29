@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Configures Git with GPG signing
+Configures Git with GPG and SSH
 #>
 param ( $Email, $UserName, $KeyID )
 $EmailTest = $null -eq $Email
@@ -22,6 +22,12 @@ function RefreshPath {
 winget install --id Git.Git -e --source winget -i
 RefreshPath
 
+#Configure GH CLI
+winget install --id GitHub.cli
+RefreshPath
+gh auth login -s write:gpg_key,admin:ssh_signing_key
+gh extension install github/gh-copilot
+
 #!GPG provided by Git is partially broken, so this is a workaround
 #Export script to bash
 $BashPart = @"
@@ -32,7 +38,13 @@ if [ -z "$KeyID" ]; then
     gpg --list-secret-keys --keyid-format=long
     read -p 'Enter enter key ID you want to use: ' KeyID
 fi
-gpg --armor --export $KeyID
+
+#Prepare SSH key
+ssh-keygen -t ed25519 -C "$Email"
+
+#Upload keys to GitHub
+gpg --armor --export $KeyID | gh gpg-key add
+gh ssh-key add ~/.ssh/id_ed25519.pub --type signing
 
 #Configure Git
 git config --global user.email "$Email"
@@ -45,12 +57,6 @@ git config --global tag.gpgSign true
 Write-Output $BashPart | Out-File BashPart.sh
 & $env:ProgramFiles'\Git\usr\bin\bash.exe' -l BashPart.sh
 Remove-Item -Path BashPart.sh
-
-#Configure GH CLI
-winget install --id GitHub.cli
-RefreshPath
-gh auth login
-gh extension install github/gh-copilot
 
 #Configure Commitizen
 #? Is winget NodeJS packege officially supported?
