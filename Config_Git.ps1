@@ -25,7 +25,7 @@ RefreshPath
 #Configure GH CLI
 winget install --id GitHub.cli
 RefreshPath
-gh auth login -s write:gpg_key,admin:ssh_signing_key
+gh auth login -s write:gpg_key,admin:public_key
 gh extension install github/gh-copilot
 
 #!GPG provided by Git is partially broken, so this is a workaround
@@ -44,7 +44,7 @@ ssh-keygen -t ed25519 -C "$Email"
 
 #Upload keys to GitHub
 gpg --armor --export $KeyID | gh gpg-key add
-gh ssh-key add ~/.ssh/id_ed25519.pub --type signing
+gh ssh-key add ~/.ssh/id_ed25519.pub
 
 #Configure Git
 git config --global user.email "$Email"
