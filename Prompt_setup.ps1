@@ -52,8 +52,9 @@ Write-Output $fragmentJson | Out-File $env:LOCALAPPDATA'\Microsoft\Windows Termi
 
 #Setup Oh My Posh
 winget install JanDeDobbeleer.OhMyPosh -s winget
-#*Other good themes are: paradox and cobalt2
-$RunOhMyPosh = 'oh-my-posh init pwsh --config ~/jandedobbeleer.omp.json | Invoke-Expression'
+#*Other good themes are: jandedobbeleer and paradox
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json -OutFile ~/cobalt2.omp.json
+$RunOhMyPosh = 'oh-my-posh init pwsh --config ~/cobalt2.omp.json | Invoke-Expression'
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted
 
 #Setup Terminal-Icons
