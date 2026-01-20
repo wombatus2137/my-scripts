@@ -97,5 +97,6 @@ function lazyg {
     git push
 }
 function touch { New-Item -Path $args }
+function reboot { shutdown /r /t 0 }
 '@
 Add-Content -Path $PROFILE -Value $RunTerminalIcons, $RunOhMyPosh, $ImportChocolateyProfile, $Aliases
