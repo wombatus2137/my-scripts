@@ -66,4 +66,4 @@ winget install -e OpenJS.NodeJS.LTS
 RefreshPath
 npm install -g commitizen
 npm install -g cz-conventional-changelog
-Write-Output -InputObject '{ "path": "cz-conventional-changelog" }' > ~/.czrc
+Write-Output -InputObject '{ "path": "cz-conventional-changelog" }' > ~\.czrc
