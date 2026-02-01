@@ -53,6 +53,8 @@ git config --global --unset gpg.format
 git config --global user.signingkey $KeyID
 git config --global commit.gpgsign true
 git config --global tag.gpgSign true
+#!Line bellow is a workaround for GitHub Desktop
+git config --global gpg.program "C:\Program Files\Git\usr\bin\gpg.exe"
 "@
 Write-Output $BashPart | Out-File BashPart.sh
 & $env:ProgramFiles'\Git\usr\bin\bash.exe' -l BashPart.sh
