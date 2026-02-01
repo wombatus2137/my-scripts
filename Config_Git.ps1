@@ -25,7 +25,7 @@ RefreshPath
 #Configure GH CLI
 winget install --id GitHub.cli
 RefreshPath
-gh auth login -s write:gpg_key,admin:public_key
+gh auth login -s admin:gpg_key,admin:public_key
 gh extension install github/gh-copilot
 
 #!GPG provided by Git is partially broken, so this is a workaround
