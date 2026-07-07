@@ -23,9 +23,6 @@ Configures Git with GPG, SSH, and Conventional Changelog
 Configures SSH.
 
 ## Prompt setup
-Installs Oh My Posh with default configuration.
+Installs Oh My Posh with recommended configuration.
 
 Inspired by: [ChrisTitusTech / powershell-profile](https://github.com/ChrisTitusTech/powershell-profile)
-
-### Reset prompt
-Resets the PowerShell profile.

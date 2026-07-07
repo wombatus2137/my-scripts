@@ -5,7 +5,9 @@ Installs Oh My Posh with default configuration
 #>
 param ( $Reset )
 if ( $Reset -eq $true ) {
-    & $PSScriptRoot'\Reset_prompt.ps1'
+    Remove-Item -Path $env:LOCALAPPDATA'\Microsoft\Windows Terminal\Fragments\custom_prompt' -Recurse
+    New-Item -Path $PROFILE -Type File -Force
+    exit
 }
 
 #Install a Nerd Font
