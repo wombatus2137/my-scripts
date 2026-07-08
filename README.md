@@ -1,5 +1,5 @@
 # my-scripts
-My collection of bat, ps and sh scripts.
+My shell script collection.
 
 ## Nothing on close & Sleep on close
 Quickly changes what happens when you close your laptop's lid.
@@ -26,3 +26,6 @@ Configures SSH.
 Installs Oh My Posh with recommended configuration.
 
 Inspired by: [ChrisTitusTech / powershell-profile](https://github.com/ChrisTitusTech/powershell-profile)
+
+## Set default editor
+Set default editor for .bat, .cmd and .ps1 "Edit" context menu option
