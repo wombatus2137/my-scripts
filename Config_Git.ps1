@@ -2,14 +2,11 @@
 .SYNOPSIS
 Configures Git with GPG and SSH
 #>
-param ( $Email, $UserName, $KeyID )
+param ( $Email, $UserName, $KeyID = '$KeyID' )
 $EmailTest = $null -eq $Email
 $UserNameTest = $null -eq $UserName
 if ( $EmailTest -or $UserNameTest ) {
     throw 'No email or username provided, input them as an argument'
-}
-if ( $null -eq $KeyID ) {
-    $KeyID = '$KeyID'
 }
 if ( !( [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent() ).IsInRole( [Security.Principal.WindowsBuiltInRole] "Administrator" ) ) {
     Write-Warning -Message "Administrator rights recommended"
