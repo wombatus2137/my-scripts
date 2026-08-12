@@ -23,7 +23,6 @@ RefreshPath
 winget install GitHub.GitHubDesktop GitHub.cli -e -s winget
 RefreshPath
 gh auth login -s admin:gpg_key,admin:public_key
-gh extension install github/gh-copilot
 
 #!GPG provided by Git is partially broken, so this is a workaround
 #Export script to bash
