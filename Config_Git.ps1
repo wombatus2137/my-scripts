@@ -16,11 +16,11 @@ function RefreshPath {
 }
 
 #Install Git
-winget install --id Git.Git -e --source winget -i
+winget install --id Git.Git -e -s winget -i
 RefreshPath
 
 #Configure GH CLI
-winget install --id GitHub.cli
+winget install GitHub.GitHubDesktop GitHub.cli -e -s winget
 RefreshPath
 gh auth login -s admin:gpg_key,admin:public_key
 gh extension install github/gh-copilot
@@ -59,7 +59,7 @@ Remove-Item -Path BashPart.sh
 
 #Configure Commitizen
 #? Is winget NodeJS packege officially supported?
-winget install -e OpenJS.NodeJS.LTS
+winget install --id OpenJS.NodeJS.LTS -e -s winget
 RefreshPath
 npm install -g commitizen
 npm install -g cz-conventional-changelog

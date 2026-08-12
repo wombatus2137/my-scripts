@@ -53,7 +53,7 @@ New-Item -Path $env:LOCALAPPDATA'\Microsoft\Windows Terminal\Fragments\custom_pr
 Write-Output $fragmentJson | Out-File $env:LOCALAPPDATA'\Microsoft\Windows Terminal\Fragments\custom_prompt\custom_prompt.json' -Encoding Utf8
 
 #Setup Oh My Posh
-winget install JanDeDobbeleer.OhMyPosh -s winget
+winget install --id JanDeDobbeleer.OhMyPosh -e -s winget
 #*Other good themes are: jandedobbeleer and paradox
 Invoke-WebRequest -Uri https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json -OutFile ~/cobalt2.omp.json
 $RunOhMyPosh = 'oh-my-posh init pwsh --config ~/cobalt2.omp.json | Invoke-Expression'
