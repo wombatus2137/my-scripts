@@ -60,7 +60,7 @@ Remove-Item -Path BashPart.sh
 #?Is winget NodeJS packege officially supported?
 winget install --id OpenJS.NodeJS.LTS -e -s winget
 RefreshPath
-npm install -g pnpm@latest-11
+npx get-pnpm
 RefreshPath
 pnpm install -g commitizen cz-conventional-changelog
 Write-Output -InputObject '{ "path": "cz-conventional-changelog" }' > ~\.czrc
