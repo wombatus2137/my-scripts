@@ -84,6 +84,13 @@ if (Test-Path($ChocolateyProfile)) {
 '@
 }
 
+#Setup pipx completion
+$pipxTest = Test-Path -Path $env:APPDATA\Python\Python314\Scripts\pipx.exe
+if ( $pipxTest ) {
+    register-python-argcomplete -s powershell pipx > ~\pipx.psm1
+    $ImportpipxCompletion = 'Import-Module "~\pipx.psm1"'
+}
+
 #Write PowerShell profile
 $PROFILETest = Test-Path -Path $PROFILE
 if ( !$PROFILETest ) {
@@ -105,4 +112,4 @@ function lazyg {
 function touch { New-Item -Path $args }
 function reboot { shutdown /r /t 0 }
 '@
-Add-Content -Path $PROFILE -Value $RunTerminalIcons, $RunOhMyPosh, $ImportChocolateyProfile, $Aliases
+Add-Content -Path $PROFILE -Value $RunTerminalIcons, $RunOhMyPosh, $ImportChocolateyProfile, $ImportpipxCompletion, $Aliases
