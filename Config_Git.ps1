@@ -57,7 +57,7 @@ Write-Output $BashPart | Out-File BashPart.sh
 Remove-Item -Path BashPart.sh
 
 #Configure Commitizen
-#? Is winget NodeJS packege officially supported?
+#?Is winget NodeJS packege officially supported?
 winget install --id OpenJS.NodeJS.LTS -e -s winget
 RefreshPath
 npm install -g pnpm@latest-11
