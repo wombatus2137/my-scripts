@@ -12,7 +12,7 @@ if ( !( [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity
     Write-Warning -Message "Administrator rights recommended"
 }
 function RefreshPath {
-    $env:Path = [System.Environment]::GetEnvironmentVariable( 'Path', 'Machine' ) + ';' + [System.Environment]::GetEnvironmentVariable( 'Path', 'User' )
+    $env:Path = [Environment]::GetEnvironmentVariable( 'Path', 'Machine' ) + ';' + [Environment]::GetEnvironmentVariable( 'Path', 'User' )
 }
 
 #Install Git
