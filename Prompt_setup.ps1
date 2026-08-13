@@ -24,6 +24,9 @@ if ( !$FontTest ) {
     }
 }
 
+#Disable telemetry
+[Environment]::SetEnvironmentVariable( 'POWERSHELL_TELEMETRY_OPTOUT', 'true', 'Machine' )
+
 #Create Windows Terminal JSON fragment to set font
 $FragmentJson = @'
 {
