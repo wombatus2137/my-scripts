@@ -11,10 +11,10 @@ if ( $Reset -eq $true ) {
 }
 
 #Install a Nerd Font
-$FontTest = Test-Path -Path "$env:LOCALAPPDATA\Microsoft\Windows\Fonts\CaskaydiaCoveNerdFont-Regular.ttf"
-$ArchiveTest = Test-Path -Path "$PSScriptRoot\CascadiaCode.zip"
-if ( !$FontTest ) {
-    if ( !$ArchiveTest ) {
+$FontDestination = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts\CaskaydiaCoveNerdFont-Regular.ttf"
+$ArchivePath = "$PSScriptRoot\CascadiaCode.zip"
+if ( !( Test-Path -Path "$FontDestination" ) ) {
+    if ( !( Test-Path -Path "$ArchivePath" ) ) {
         Invoke-WebRequest -Uri https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.zip -OutFile "$PSScriptRoot\CascadiaCode.zip"
     }
     Expand-Archive -Path "$PSScriptRoot\CascadiaCode.zip"
@@ -69,8 +69,8 @@ Set-TerminalIconsTheme -IconTheme devblackops -ColorTheme devblackops
 $RunTerminalIcons = 'Import-Module -Name Terminal-Icons'
 
 #Import Chocolatey Profile
-$ChocolateyProfileTest = Test-Path -Path "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if ( $ChocolateyProfileTest ) {
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if ( Test-Path -Path "$ChocolateyProfile" ) {
     $ImportChocolateyProfile = @'
 # Import the Chocolatey Profile that contains the necessary code to enable
 # tab-completions to function for `choco`.
@@ -85,15 +85,14 @@ if ( Test-Path -Path "$ChocolateyProfile" ) {
 }
 
 #Setup pipx completion
-$pipxTest = Test-Path -Path "$env:APPDATA\Python\Python314\Scripts\pipx.exe"
-if ( $pipxTest ) {
-    register-python-argcomplete -s powershell pipx | Out-File -FilePath $env:USERPROFILE\pipx.psm1
+$pipxPath = "$env:APPDATA\Python\Python314\Scripts\pipx.exe"
+if ( Test-Path -Path "$pipxPath" ) {
+    register-python-argcomplete -s powershell pipx | Out-File -FilePath "$env:USERPROFILE\pipx.psm1"
     $ImportpipxCompletion = 'Import-Module "$env:USERPROFILE\pipx.psm1"'
 }
 
 #Write PowerShell profile
-$PROFILETest = Test-Path -Path "$PROFILE"
-if ( !$PROFILETest ) {
+if ( !( Test-Path -Path "$PROFILE" ) ) {
     New-Item -Path "$PROFILE" -Type File -Force
 }
 $Aliases = @'
@@ -112,4 +111,4 @@ function lazyg {
 function touch { New-Item -Path $args }
 function reboot { shutdown /r /t 0 }
 '@
-Add-Content -Path "$PROFILE" -Value $RunTerminalIcons, $RunOhMyPosh, $ImportChocolateyProfile, $ImportpipxCompletion, $Aliases
+Add-Content -Path "$PROFILE" -Value "$RunTerminalIcons", "$RunOhMyPosh", "$ImportChocolateyProfile", "$ImportpipxCompletion", "$Aliases"

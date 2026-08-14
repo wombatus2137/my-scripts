@@ -3,9 +3,7 @@
 Configures Git with GPG and SSH
 #>
 param ( $Email, $UserName, $KeyID = '$KeyID' )
-$EmailTest = $null -eq $Email
-$UserNameTest = $null -eq $UserName
-if ( $EmailTest -or $UserNameTest ) {
+if ( ( $null -eq $Email )  -or ( $null -eq $UserName ) ) {
     throw 'No email or username provided, input them as an argument'
 }
 if ( !( [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent() ).IsInRole( [Security.Principal.WindowsBuiltInRole] 'Administrator' ) ) {
@@ -29,7 +27,7 @@ gh auth login -s admin:gpg_key,admin:public_key
 $BashPart = @"
 #!/bin/bash
 #Prepare GPG key
-if [ -z $KeyID ]; then
+if [ -z "$KeyID" ]; then
     gpg --full-generate-key
     gpg --list-secret-keys --keyid-format=long
     read -p 'Enter enter key ID you want to use: ' KeyID

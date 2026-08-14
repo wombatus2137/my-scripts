@@ -13,11 +13,8 @@ if ( $null -eq $Server ) {
 }
 
 #Generate SSH key
-$KeyTest = Test-Path -Path "$env:USERPROFILE\.ssh\id_ed25519"
-if ( !$KeyTest ) {
-    $Email = Read-Host -Prompt 'Email for SSH key'
-    ssh-keygen -t ed25519 -C "$Email"
-}
+$Email = Read-Host -Prompt 'Email for SSH key'
+ssh-keygen -t ed25519 -C "$Email"
 
 #Set the ssh-agent service to be started automatically
 Get-Service -Name ssh-agent | Set-Service -StartupType Automatic
