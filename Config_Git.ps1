@@ -8,11 +8,11 @@ $UserNameTest = $null -eq $UserName
 if ( $EmailTest -or $UserNameTest ) {
     throw 'No email or username provided, input them as an argument'
 }
-if ( !( [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent() ).IsInRole( [Security.Principal.WindowsBuiltInRole] "Administrator" ) ) {
-    Write-Warning -Message "Administrator rights recommended"
+if ( !( [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent() ).IsInRole( [Security.Principal.WindowsBuiltInRole] 'Administrator' ) ) {
+    Write-Warning -Message 'Administrator rights recommended'
 }
 function RefreshPath {
-    $env:Path = [Environment]::GetEnvironmentVariable( 'Path', 'Machine' ) + ';' + [Environment]::GetEnvironmentVariable( 'Path', 'User' )
+    $env:PATH = [Environment]::GetEnvironmentVariable( 'Path', 'Machine' ) + ';' + [Environment]::GetEnvironmentVariable( 'Path', 'User' )
 }
 
 #Install Git
@@ -29,32 +29,32 @@ gh auth login -s admin:gpg_key,admin:public_key
 $BashPart = @"
 #!/bin/bash
 #Prepare GPG key
-if [ -z "$KeyID" ]; then
+if [ -z $KeyID ]; then
     gpg --full-generate-key
     gpg --list-secret-keys --keyid-format=long
     read -p 'Enter enter key ID you want to use: ' KeyID
 fi
 
 #Prepare SSH key
-ssh-keygen -t ed25519 -C "$Email"
+ssh-keygen -t ed25519 -C '$Email'
 
 #Upload keys to GitHub
-gpg --armor --export $KeyID | gh gpg-key add
+gpg --armor --export "$KeyID" | gh gpg-key add
 gh ssh-key add ~/.ssh/id_ed25519.pub
 
 #Configure Git
-git config --global user.email "$Email"
-git config --global user.name "$UserName"
+git config --global user.email '$Email'
+git config --global user.name '$UserName'
 git config --global --unset gpg.format
-git config --global user.signingkey $KeyID
+git config --global user.signingkey "$KeyID"
 git config --global commit.gpgsign true
 git config --global tag.gpgSign true
 #!Line bellow is a workaround for GitHub Desktop
 git config --global gpg.program "C:\Program Files\Git\usr\bin\gpg.exe"
 "@
-Write-Output $BashPart | Out-File BashPart.sh
-& $env:ProgramFiles'\Git\usr\bin\bash.exe' -l BashPart.sh
-Remove-Item -Path BashPart.sh
+Write-Output -InputObject "$BashPart" | Out-File -FilePath 'BashPart.sh'
+& "$env:PROGRAMFILES\Git\usr\bin\bash.exe" -l BashPart.sh
+Remove-Item -Path 'BashPart.sh'
 
 #Configure Commitizen
 #?Is winget NodeJS packege officially supported?
@@ -63,4 +63,4 @@ RefreshPath
 npx get-pnpm
 RefreshPath
 pnpm install -g commitizen cz-conventional-changelog
-Write-Output -InputObject '{ "path": "cz-conventional-changelog" }' > $env:UserProfile\.czrc
+Write-Output -InputObject '{ "path": "cz-conventional-changelog" }' | Out-File -FilePath "$env:USERPROFILE\.czrc"

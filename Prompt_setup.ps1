@@ -5,20 +5,20 @@ Installs Oh My Posh with default configuration
 #>
 param ( $Reset )
 if ( $Reset -eq $true ) {
-    Remove-Item -Path $env:LOCALAPPDATA'\Microsoft\Windows Terminal\Fragments\custom_prompt' -Recurse
-    New-Item -Path $PROFILE -Type File -Force
+    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows Terminal\Fragments\custom_prompt" -Recurse
+    New-Item -Path "$PROFILE" -Type File -Force
     exit
 }
 
 #Install a Nerd Font
-$FontTest = Test-Path -Path $env:LOCALAPPDATA'\Microsoft\Windows\Fonts\CaskaydiaCoveNerdFont-Regular.ttf'
-$ArchiveTest = Test-Path -Path .\CascadiaCode.zip
+$FontTest = Test-Path -Path "$env:LOCALAPPDATA\Microsoft\Windows\Fonts\CaskaydiaCoveNerdFont-Regular.ttf"
+$ArchiveTest = Test-Path -Path "$PSScriptRoot\CascadiaCode.zip"
 if ( !$FontTest ) {
     if ( !$ArchiveTest ) {
-        Invoke-WebRequest -Uri https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.zip -OutFile .\CascadiaCode.zip
+        Invoke-WebRequest -Uri https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.zip -OutFile "$PSScriptRoot\CascadiaCode.zip"
     }
-    Expand-Archive -Path .\CascadiaCode.zip
-    Get-ChildItem -Path .\CascadiaCode\*.ttf | ForEach-Object -Process {
+    Expand-Archive -Path "$PSScriptRoot\CascadiaCode.zip"
+    Get-ChildItem -Path "$PSScriptRoot\CascadiaCode\*.ttf" | ForEach-Object -Process {
         ( ( New-Object -ComObject Shell.Application ).Namespace( 0x14 ) ).CopyHere( $_.FullName )
         Write-Warning -Message 'Reboot to complete font installation'
     }
@@ -52,14 +52,14 @@ $FragmentJson = @'
   ]
 }
 '@
-New-Item -Path $env:LOCALAPPDATA'\Microsoft\Windows Terminal\Fragments\custom_prompt' -Type Directory
-Write-Output $fragmentJson | Out-File $env:LOCALAPPDATA'\Microsoft\Windows Terminal\Fragments\custom_prompt\custom_prompt.json' -Encoding Utf8
+New-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows Terminal\Fragments\custom_prompt" -Type Directory
+Write-Output $fragmentJson | Out-File "$env:LOCALAPPDATA\Microsoft\Windows Terminal\Fragments\custom_prompt\custom_prompt.json" -Encoding Utf8
 
 #Setup Oh My Posh
 winget install --id JanDeDobbeleer.OhMyPosh -e -s winget
 #*Other good themes are: jandedobbeleer and paradox
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json -OutFile $env:UserProfile\cobalt2.omp.json
-$RunOhMyPosh = 'oh-my-posh init pwsh --config $env:UserProfile\cobalt2.omp.json | Invoke-Expression'
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json -OutFile "$env:USERPROFILE\cobalt2.omp.json"
+$RunOhMyPosh = 'oh-my-posh init pwsh --config $env:USERPROFILE\cobalt2.omp.json | Invoke-Expression'
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted
 
 #Setup Terminal-Icons
@@ -69,7 +69,7 @@ Set-TerminalIconsTheme -IconTheme devblackops -ColorTheme devblackops
 $RunTerminalIcons = 'Import-Module -Name Terminal-Icons'
 
 #Import Chocolatey Profile
-$ChocolateyProfileTest = Test-Path -Path $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+$ChocolateyProfileTest = Test-Path -Path "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if ( $ChocolateyProfileTest ) {
     $ImportChocolateyProfile = @'
 # Import the Chocolatey Profile that contains the necessary code to enable
@@ -78,23 +78,23 @@ if ( $ChocolateyProfileTest ) {
 # for `choco` will not function.
 # See https://ch0.co/tab-completion for details.
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
+if ( Test-Path -Path "$ChocolateyProfile" ) {
   Import-Module "$ChocolateyProfile"
 }
 '@
 }
 
 #Setup pipx completion
-$pipxTest = Test-Path -Path $env:APPDATA\Python\Python314\Scripts\pipx.exe
+$pipxTest = Test-Path -Path "$env:APPDATA\Python\Python314\Scripts\pipx.exe"
 if ( $pipxTest ) {
-    register-python-argcomplete -s powershell pipx > $env:UserProfile\pipx.psm1
-    $ImportpipxCompletion = 'Import-Module "$env:UserProfile\pipx.psm1"'
+    register-python-argcomplete -s powershell pipx | Out-File -FilePath $env:USERPROFILE\pipx.psm1
+    $ImportpipxCompletion = 'Import-Module "$env:USERPROFILE\pipx.psm1"'
 }
 
 #Write PowerShell profile
-$PROFILETest = Test-Path -Path $PROFILE
+$PROFILETest = Test-Path -Path "$PROFILE"
 if ( !$PROFILETest ) {
-    New-Item -Path $PROFILE -Type File -Force
+    New-Item -Path "$PROFILE" -Type File -Force
 }
 $Aliases = @'
 function ipa { ipconfig /all }
@@ -112,4 +112,4 @@ function lazyg {
 function touch { New-Item -Path $args }
 function reboot { shutdown /r /t 0 }
 '@
-Add-Content -Path $PROFILE -Value $RunTerminalIcons, $RunOhMyPosh, $ImportChocolateyProfile, $ImportpipxCompletion, $Aliases
+Add-Content -Path "$PROFILE" -Value $RunTerminalIcons, $RunOhMyPosh, $ImportChocolateyProfile, $ImportpipxCompletion, $Aliases

@@ -13,7 +13,7 @@ if ( $null -eq $Server ) {
 }
 
 #Generate SSH key
-$KeyTest = Test-Path -Path $env:USERPROFILE'\.ssh\id_ed25519'
+$KeyTest = Test-Path -Path "$env:USERPROFILE\.ssh\id_ed25519"
 if ( !$KeyTest ) {
     $Email = Read-Host -Prompt 'Email for SSH key'
     ssh-keygen -t ed25519 -C "$Email"
@@ -29,7 +29,7 @@ Start-Service -Name ssh-agent
 Get-Service -Name ssh-agent
 
 #Load your key files into ssh-agent
-ssh-add $env:USERPROFILE\.ssh\id_ed25519
+ssh-add "$env:USERPROFILE\.ssh\id_ed25519"
 
 #Copy public key to the server
-scp $env:USERPROFILE\.ssh\id_ed25519.pub $RemoteUser@"$Server":C:\ProgramData\ssh\
+scp "$env:USERPROFILE\.ssh\id_ed25519.pub" $RemoteUser@"$Server":C:\ProgramData\ssh\
