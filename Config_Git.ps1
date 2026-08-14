@@ -63,4 +63,4 @@ RefreshPath
 npx get-pnpm
 RefreshPath
 pnpm install -g commitizen cz-conventional-changelog
-Write-Output -InputObject '{ "path": "cz-conventional-changelog" }' > ~\.czrc
+Write-Output -InputObject '{ "path": "cz-conventional-changelog" }' > $env:UserProfile\.czrc

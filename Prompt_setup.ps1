@@ -58,8 +58,8 @@ Write-Output $fragmentJson | Out-File $env:LOCALAPPDATA'\Microsoft\Windows Termi
 #Setup Oh My Posh
 winget install --id JanDeDobbeleer.OhMyPosh -e -s winget
 #*Other good themes are: jandedobbeleer and paradox
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json -OutFile ~/cobalt2.omp.json
-$RunOhMyPosh = 'oh-my-posh init pwsh --config ~/cobalt2.omp.json | Invoke-Expression'
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json -OutFile $env:UserProfile\cobalt2.omp.json
+$RunOhMyPosh = 'oh-my-posh init pwsh --config $env:UserProfile\cobalt2.omp.json | Invoke-Expression'
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted
 
 #Setup Terminal-Icons
@@ -87,8 +87,8 @@ if (Test-Path($ChocolateyProfile)) {
 #Setup pipx completion
 $pipxTest = Test-Path -Path $env:APPDATA\Python\Python314\Scripts\pipx.exe
 if ( $pipxTest ) {
-    register-python-argcomplete -s powershell pipx > ~\pipx.psm1
-    $ImportpipxCompletion = 'Import-Module "~\pipx.psm1"'
+    register-python-argcomplete -s powershell pipx > $env:UserProfile\pipx.psm1
+    $ImportpipxCompletion = 'Import-Module "$env:UserProfile\pipx.psm1"'
 }
 
 #Write PowerShell profile
