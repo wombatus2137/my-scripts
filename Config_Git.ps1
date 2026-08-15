@@ -50,9 +50,7 @@ git config --global tag.gpgSign true
 #!Line bellow is a workaround for GitHub Desktop
 git config --global gpg.program "C:\Program Files\Git\usr\bin\gpg.exe"
 "@
-Write-Output -InputObject "$BashPart" | Out-File -FilePath 'BashPart.sh'
-& "$env:PROGRAMFILES\Git\usr\bin\bash.exe" -l BashPart.sh
-Remove-Item -Path 'BashPart.sh'
+& "$env:PROGRAMFILES\Git\usr\bin\bash.exe" -l -c $BashPart
 
 #Configure Commitizen
 #?Is winget NodeJS packege officially supported?
