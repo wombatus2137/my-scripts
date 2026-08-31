@@ -24,5 +24,5 @@ Get-ChildItem -File | Sort-Object -Property CreationTime | ForEach-Object -Proce
     }
     $Extension = $_.Extension
     $FinalName = CheckName -ProposedName $CreationDate
-    Rename-Item -Path $_.Name -NewName "$FinalName$Extension"
+    Rename-Item -Path $_ -NewName "$FinalName$Extension"
 }
