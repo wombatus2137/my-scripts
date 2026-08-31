@@ -48,9 +48,9 @@ git config --global user.signingkey "$KeyID"
 git config --global commit.gpgsign true
 git config --global tag.gpgSign true
 #!Line bellow is a workaround for GitHub Desktop
-git config --global gpg.program "C:\Program Files\Git\usr\bin\gpg.exe"
+git config --global gpg.program 'C:\Program Files\Git\usr\bin\gpg.exe'
 "@
-& "$env:PROGRAMFILES\Git\usr\bin\bash.exe" -l -c $BashPart
+& "${env:PROGRAMFILES}\Git\usr\bin\bash.exe" -l -c $BashPart
 
 #Configure Commitizen
 #?Is winget NodeJS packege officially supported?
@@ -59,4 +59,4 @@ RefreshPath
 npx get-pnpm
 RefreshPath
 pnpm install -g commitizen cz-conventional-changelog
-Write-Output -InputObject '{ "path": "cz-conventional-changelog" }' | Out-File -FilePath "$env:USERPROFILE\.czrc"
+Write-Output -InputObject '{ "path": "cz-conventional-changelog" }' | Out-File -FilePath "${env:USERPROFILE}\.czrc"
