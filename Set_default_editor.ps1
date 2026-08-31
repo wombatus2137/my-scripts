@@ -11,7 +11,7 @@ if ( $Reset -eq $true ) {
     exit
 }
 if ( $null -eq $EditorPath ) {
-    throw 'No editor path provided, input it as an argument'
+    $EditorPath = Read-Host -Prompt 'Input editor path in Windows variables format like (%LOCALAPPDATA%\Programs\Microsoft VS Code\Code.exe)'
 }
 
 [Environment]::SetEnvironmentVariable('EDITOR', "$EditorPath", 'User')
