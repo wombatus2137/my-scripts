@@ -19,6 +19,9 @@ Releases current and request new IP from DHCP server.
 ## Config Git
 Configures Git with GPG, SSH, and Conventional Changelog
 
+## Install Python
+Installs Python with pipx
+
 ## SSH server & SSH client
 Configures SSH.
 
