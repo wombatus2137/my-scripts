@@ -60,7 +60,7 @@ winget install --id JanDeDobbeleer.OhMyPosh -e -s winget
 #*Other good themes are: jandedobbeleer and paradox
 Invoke-WebRequest -Uri https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json -OutFile "${env:USERPROFILE}\cobalt2.omp.json"
 $RunOhMyPosh = 'oh-my-posh init pwsh --config "${env:USERPROFILE}\cobalt2.omp.json" | Invoke-Expression'
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
 
 #Setup Terminal-Icons
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
