@@ -11,14 +11,14 @@ if ( $Reset -eq $true ) {
 }
 
 #Install a Nerd Font
-$FontDestination = "${env:LOCALAPPDATA}\Microsoft\Windows\Fonts\CaskaydiaCoveNerdFont-Regular.ttf"
-$ArchivePath = "${PSScriptRoot}\CascadiaCode.zip"
+$FontDestination = "${env:LOCALAPPDATA}\Microsoft\Windows\Fonts\CascadiaCodeNF.ttf"
+$ArchiveDestination = "${PSScriptRoot}\CascadiaCode.zip"
 if ( !( Test-Path -Path "${FontDestination}" ) ) {
-    if ( !( Test-Path -Path "${ArchivePath}" ) ) {
-        Invoke-WebRequest -Uri https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.zip -OutFile "${PSScriptRoot}\CascadiaCode.zip"
+    if ( !( Test-Path -Path "${$ArchiveDestination}" ) ) {
+        Invoke-WebRequest -Uri https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip -OutFile "${ArchiveDestination}"
     }
-    Expand-Archive -Path "${PSScriptRoot}\CascadiaCode.zip"
-    Get-ChildItem -Path "${PSScriptRoot}\CascadiaCode\*.ttf" | ForEach-Object -Process {
+    Expand-Archive -Path "${ArchiveDestination}"
+    Get-ChildItem -Path "${PSScriptRoot}\CascadiaCode\ttf\Cascadia*NF*.ttf" | ForEach-Object -Process {
         ( ( New-Object -ComObject Shell.Application ).Namespace( 0x14 ) ).CopyHere( $_.FullName )
     }
     Write-Warning -Message 'Reboot to complete font installation'
@@ -35,7 +35,7 @@ $FragmentJson = @'
       "updates": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
       "font": 
       {
-        "face": "CaskaydiaCove Nerd Font"
+        "face": "Cascadia Code NF"
       },
       "opacity": 70,
       "useAcrylic": true
@@ -44,7 +44,7 @@ $FragmentJson = @'
       "updates": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
       "font": 
       {
-        "face": "CaskaydiaCove Nerd Font"
+        "face": "Cascadia Code NF"
       },
       "opacity": 70,
       "useAcrylic": true
@@ -53,7 +53,7 @@ $FragmentJson = @'
 }
 '@
 New-Item -Path "${env:LOCALAPPDATA}\Microsoft\Windows Terminal\Fragments\custom_prompt" -Type Directory
-Write-Output $fragmentJson | Out-File "${env:LOCALAPPDATA}\Microsoft\Windows Terminal\Fragments\custom_prompt\custom_prompt.json" -Encoding Utf8
+Write-Output $FragmentJson | Out-File "${env:LOCALAPPDATA}\Microsoft\Windows Terminal\Fragments\custom_prompt\custom_prompt.json" -Encoding Utf8
 
 #Setup Oh My Posh
 winget install --id JanDeDobbeleer.OhMyPosh -e -s winget
