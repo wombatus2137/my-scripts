@@ -14,6 +14,9 @@ if ( $null -eq $EditorPath ) {
     $EditorPath = Read-Host -Prompt 'Input editor path in Windows variables format like (%LOCALAPPDATA%\Programs\Microsoft VS Code\Code.exe)'
 }
 
+if ( $EditorPath -match ' ' ) {
+    $EditorPath = "`"${EditorPath}`""
+}
 [Environment]::SetEnvironmentVariable('EDITOR', "${EditorPath}", 'User')
 New-Item -Path 'HKCU:\Software\Classes\batfile\shell\edit\command' -Value '%EDITOR% %1' -ItemType ExpandString -Force
 New-Item -Path 'HKCU:\Software\Classes\cmdfile\shell\edit\command' -Value '%EDITOR% %1' -ItemType ExpandString -Force
