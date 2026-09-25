@@ -30,5 +30,5 @@ Installs Oh My Posh with recommended configuration.
 
 Inspired by: [ChrisTitusTech / powershell-profile](https://github.com/ChrisTitusTech/powershell-profile)
 
-## Set default editor
+## Default editor
 Set default editor for .bat, .cmd and .ps1 "Edit" context menu option
