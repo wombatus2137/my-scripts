@@ -17,10 +17,10 @@ Checks Windows system files for corruption.
 Releases current and request new IP from DHCP server.
 
 ## Config Git
-Configures Git with GPG, SSH, and Conventional Changelog
+Configures Git with GPG, SSH, and Conventional Changelog.
 
 ## Install Python
-Installs Python with pipx
+Installs Python with pipx.
 
 ## SSH server & SSH client
 Configures SSH.
@@ -31,4 +31,4 @@ Installs Oh My Posh with recommended configuration.
 Inspired by: [ChrisTitusTech / powershell-profile](https://github.com/ChrisTitusTech/powershell-profile)
 
 ## Default editor
-Set default editor for .bat, .cmd and .ps1 "Edit" context menu option
+Set default editor for .bat, .cmd and .ps1 "Edit" context menu option.
