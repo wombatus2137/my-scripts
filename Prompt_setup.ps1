@@ -14,7 +14,7 @@ if ( $Reset -eq $true ) {
 $FontDestination = "${env:LOCALAPPDATA}\Microsoft\Windows\Fonts\CascadiaCodeNF.ttf"
 $ArchiveDestination = "${PSScriptRoot}\CascadiaCode.zip"
 if ( !( Test-Path -Path "${FontDestination}" ) ) {
-    if ( !( Test-Path -Path "${$ArchiveDestination}" ) ) {
+    if ( !( Test-Path -Path "${ArchiveDestination}" ) ) {
         Invoke-WebRequest -Uri https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip -OutFile "${ArchiveDestination}"
     }
     Expand-Archive -Path "${ArchiveDestination}"
