@@ -64,7 +64,7 @@ Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
 
 #Setup Terminal-Icons
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-Install-Module -Name Terminal-Icons -Repository PSGallery
+Install-Module -Name Terminal-Icons -Repository PSGallery -Scope CurrentUser
 Set-TerminalIconsTheme -IconTheme devblackops -ColorTheme devblackops
 $RunTerminalIcons = 'Import-Module -Name Terminal-Icons'
 
